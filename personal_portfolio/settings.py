@@ -27,13 +27,14 @@ SECRET_KEY = 'i@epr23jl*&@y+g5jf+11pgfh50bj6z)i2m(b2@+a2slt&3jck'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 CREATED_APPS = [
     'projects',
+    'cv',
 ]
 
 INSTALLED_APPS = [
