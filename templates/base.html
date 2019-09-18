@@ -1,0 +1,336 @@
+{% load static %}
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Simple V-card</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--Main styles-->
+<link rel="stylesheet" href='{% static "fancybox/jquery.fancybox-1.3.4.css" %}' />
+<link rel="stylesheet" href='{% static "css/main.css" %}' />
+
+<!--Alternate styles-->
+<link rel="stylesheet" href='{% static "css/red.css" title="red" %}' />
+<link rel="alternate stylesheet" href='{% static "css/blue.css" %}' title="blue" />
+<link rel="alternate stylesheet" href='{% static "css/yellow.css" %}' title="yellow" />
+<link rel="alternate stylesheet" href='{% static "css/green.css" %}' title="green" />
+
+<!--JavaScript lib-->
+<script src='{% static "lib/jquery-1.7.1.min.js" %}' type="text/javascript"></script>
+<script src='{% static "lib/jquery.fancybox-1.3.4.js" %}' type="text/javascript"></script>
+<script src='{% static "lib/jquery.easytabs.min.js" %}' type="text/javascript"></script>
+<script src='{% static "lib/jquery.quicksand.js" %}' type="text/javascript"></script>
+<script src='{% static "lib/jquery.easing.1.3.js" %}' type="text/javascript"></script>
+<script src='{% static "lib/jquery.poshytip.min.js" %}' type="text/javascript"></script>
+<script src='{% static "lib/jquery.validate.js" %}' type="text/javascript"></script>
+<script src='{% static "lib/custom.js" %}' type="text/javascript"></script>
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+
+
+<!--[if lt IE 8]>
+<style>
+/* For IE < 8 (trigger hasLayout) */
+.clearfix {
+    zoom:1;
+}
+</style>
+<![endif]--> 
+
+<!--Style switching--> 
+<script>
+
+function setActiveStyleSheet(title) {
+  var i, a, main;
+  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+    if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
+      a.disabled = true;
+      if(a.getAttribute("title") == title) a.disabled = false;
+    }
+  }
+}
+
+function getActiveStyleSheet() {
+  var i, a;
+  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+    if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title") && !a.disabled) return a.getAttribute("title");
+  }
+  return null;
+}
+
+function getPreferredStyleSheet() {
+  var i, a;
+  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+    if(a.getAttribute("rel").indexOf("style") != -1
+       && a.getAttribute("rel").indexOf("alt") == -1
+       && a.getAttribute("title")
+       ) return a.getAttribute("title");
+  }
+  return null;
+}
+
+function createCookie(name,value,days) {
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime()+(days*24*60*60*1000));
+    var expires = "; expires="+date.toGMTString();
+  }
+  else expires = "";
+  document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function readCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0;i < ca.length;i++) {
+    var c = ca[i];
+    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+  }
+  return null;
+}
+
+window.onload = function(e) {
+  var cookie = readCookie("style");
+  var title = cookie ? cookie : getPreferredStyleSheet();
+  setActiveStyleSheet(title);
+}
+
+window.onunload = function(e) {
+  var title = getActiveStyleSheet();
+  createCookie("style", title, 365);
+}
+
+var cookie = readCookie("style");
+var title = cookie ? cookie : getPreferredStyleSheet();
+setActiveStyleSheet(title);
+
+
+</script>
+
+<!--End style switching--> 
+<body>
+	<!--Styles switcher-->
+	<div id ="styleswitcher">
+		
+		<div id="inset">
+		<div id="coloroptions">
+			<figure class="figcol"><img src='{% static "images/color.png" %}' alt=""></figure>
+			<ul>
+			<li class="red"><a href="#" onclick="setActiveStyleSheet('red'); return false;">Red</a></li>
+			<li class="blue"><a href="#" onclick="setActiveStyleSheet('blue'); return false;">Blue</a></li>
+			<li class="yellow"><a href="#" onclick="setActiveStyleSheet('yellow'); return false;">Yellow</a></li>
+			<li class="green"><a href="#" onclick="setActiveStyleSheet('green'); return false;">Green</a></li>
+			</ul>
+			
+			</div>
+		<div id="patternoptions">
+				<figure class="figpatt"><img src='{% static "images/pattern.png" %}' alt=""></figure>
+			<ul>
+			<li><a class="switcher" href="#" data-id="1"><img src='{% static "images/pattern/patt1.png" %}' width="35" height="20" alt=""/></a></li>
+			<li><a class="switcher" href="#" data-id="2"><img src='{% static "images/pattern/patt2.png" %}' width="35" height="20" alt=""/></a></li>
+			<li><a class="switcher" href="#" data-id="3"><img src='{% static "images/pattern/patt3.png" %}' width="35" height="20" alt=""/></a></li>
+			<li><a class="switcher" href="#" data-id="4"><img src='{% static "images/pattern/patt4.png" %}' width="35" height="20" alt=""/></a></li>
+			</ul>
+		</div>
+		</div>
+		</div>
+		
+		<!-- End tyles switcher -->
+	<!--Page Wrraper-->
+	<div id="wrapper">
+			
+<!--Page Header-->
+<header id="header">
+	
+	<figure><a href="#"><h2>Download my v-card</h2></a></figure>
+<nav id="mainNav">
+		<ul  class="tabs">
+			<li ><a href="#home">Home</a></li>
+			<li><a href="#portfolio">Portfolio</a></li>
+			<li><a  href="#social">Social</a></li>
+			<li><a  href="#contact">Contact</a></li>
+		</ul>
+	</nav>	
+</header>
+<!--End Page Header-->
+
+<!-- Tabs Container-->
+<section id="tabsContainer">
+	<!--Inner-->
+	<div id="innerBg">
+		
+			<!--About Tab-->
+		<article id="home" class="clearfix">
+			<figure id="img"></figure>
+			
+				<div id="about">
+				<hgroup>
+				<h1>John Doe</h1>
+				<h3>WebDesigner/Developer</h3>
+				</hgroup>
+				
+					<!--Intro Section-->
+				<section id="introduction">
+					<h2>About</h2>
+					<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+					</p>
+				</section>
+					<!--End Intro Section-->
+				
+				<!--Skills Section-->
+				<section id="skills">
+				<h2>Skills</h2>
+				
+					<ul class="skillList">
+						<li>Photoshop</li>
+						<li>Javascript</li>
+						<li>SEO</li>
+						</ul>
+						
+						<ul class="skillList">
+							<li>HTML/CSS</li>
+							<li>PHP/ASP</li>
+							<li>WordPress</li>
+							</ul>
+							
+							<ul class="skillList">
+								<li>Logo &amp; Illustration</li>
+								<li>Icon-Design</li>
+								<li>Web &amp; GUI-Design</li>
+								</ul>
+						</section>
+					<!--End Skills Section-->
+				</div>
+				<!--End About Tab-->
+			</article>
+
+			<!--Portfolio Tab-->
+		<article id="portfolio" class="clearfix">
+			<h2>My works</h2>
+
+			{% block portfolio %}
+
+
+
+			<!-- Filter nav -->
+			<ul id="category" class="filter">
+				<li class="all current"><a href="#" >All</a></li>
+
+				{% for category in categories %}
+				<li class="{{ category.name }}"><a href="#">{{ category.name }}</a></li>
+				{% endfor %}
+
+				</ul>
+					<!-- Filter nav -->
+					
+				<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+				
+				<!-- Works list -->
+				<section id="works">
+					<ul id="items" class="portfolio">
+
+
+						{% for project in projects %}
+						<li data-id="id-1" data-type="{{ project.categories }}" class="item"><a href='{{ project.image.url }}' class="folio"><img src='{{ project.image.url }}' width="180" height="158" alt="" /></a><h3>{{ project.title }}<span> / In {{ project.categories }}</span></h3><p>{{ project.description|truncatechars:80 }}</p>
+						<a href="{% url 'project_detail' pk=project.pk %}#portfolio"><button style="border-radius: 4px; border: none; padding: 7px; color: #FFFFFF; cursor:pointer" class="current">View More</button></a>
+						</li>
+						{% endfor %}
+
+
+
+					</ul>
+				</section>
+				<!-- End Works list -->
+
+			{% endblock %}
+		</article>
+			<!--End About Portfolio Tab-->
+				
+			<!--Social Tab-->	
+		<article id="social" class="clearfix">
+				<h2>My social network</h2>
+				
+					<!-- Socials -->	
+				<section id="socialsLists" class="clearfix">
+				<ul class="socialList1 ">
+					<li><a href="#" ><img src='{% static "images/fb.png" %}' alt=""/><h3>FaceBook</h3><span>facebook.com/yourname</span></a></li>
+					<li><a href="#"><img src='{% static "images/tw.png" %}' alt="" /><h3>Twitter</h3><span>twitter.com/yourname</span></a></li>
+					<li><a href="#" ><img src='{% static "images/fl.png" %}' alt=""/><h3>Flickr</h3><span>flickr.com/yourname</span></a></li>
+					</ul>
+					
+					<ul class="socialList2 ">
+						<li><a href="#" ><img src='{% static "images/in.png" %}' alt=""/><h3>Linkedin</h3><span>linkedin.com/yourname</span></a></li>
+						<li><a href="#"><img src='{% static "images/vm.png" %}' alt=""/><h3>Vimeo</h3><span>vimeo.com/yourname</span></a></li>
+						<li><a href="#"><img src='{% static "images/rss.png" %}' alt=""/><h3>Rss Feed</h3><span>rss.com/yoursite</span></a></li>
+						</ul>
+						</section>
+						<!-- End Socials -->
+						
+						<!-- Tweets -->	
+						<section id="twitter" class="clearfix">
+							<img src='{% static "images/tw-bird.png" %}' alt=""/><h2>Latest Tweets</h2><h3>Benaissa Ghrib@BenaissaGhrib</h3><span>The top graphic in this @github blog post says it all about icon fonts: https://github.com/blog/1106-say-hello-to-octicons
+													</span>
+							</section>
+								<!-- End Tweets -->	
+			
+			
+		</article>
+			<!--End Social Tab-->
+			
+				<!--Contact Tab-->	
+		<article id="contact" class="clearfix">
+				<h2>Contact</h2>
+			<!--Contact form-->		
+			<section id="contactForm">
+				<h3>Feel Free to send me an email</h3>
+				<form class="contactForm" method="post" action="send.php">
+			        <input type="text" name="name" id="name" placeholder="Your Name" class="required">
+			        <input type="email" name="email" id="email"  placeholder="Your Email" class="required">
+			        <textarea name="message" id="message"  cols="45" rows="10" placeholder="Your Message" class="required"></textarea>
+			        <input type="submit" name="submit" id="submit" value="Send your email">
+			      </form>
+				</section>
+				
+				<!--End Contact form-->	
+				
+				<!--Contact info-->	
+				<section id="contactInfo">
+						<h3>Contact Information</h3>
+						<figure><a id="googlemap" class="map" title="View Via Google Maps" href="http://maps.google.fr/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q=rabat+agdal&amp;aq=&amp;sll=34.004252,-6.84522&amp;sspn=0.03515,0.077162&amp;ie=UTF8&amp;hq=&amp;hnear=Agdal,+Rabat,+Rabat-Sal%C3%A9-Zemmour-Za%C3%ABr,+Maroc&amp;ll=34.004218,-6.845255&amp;spn=0.035154,0.077162&amp;t=m&amp;z=14&amp;output=embed"><img src='{% static "images/map.png" %}'  alt=""/></a></figure>
+						
+					
+					   
+							<p class="hr">The Company Name Inc.
+						1234 Street Road,
+						City Name, IN 567 890.</p>
+						
+                            <ul> 
+						<li><span>Telephone</span> : + 1-600-149-2567</li>
+						<li><span>Cellphone</span> : + 103-756-702</li>
+						<li><span>Fax</span> : + 103-756-702</li>
+
+						<li><span>Email</span> : name@companyname.com</li>
+							<li><span>Website</span> : http://www.sitename.com</li>
+							</ul>
+					</section>
+					<!--End Contact info-->	
+		</article>
+			<!--End Contact Tab-->	
+
+</div>
+<!--End Inner-->		
+</section>
+<!--End Tabs Container-->
+
+<!-- Page Footer-->
+<footer id="pageFooter">
+	<p>Copyright 2012 John Doe Personal Vcard - By <span>Benaissa Ghrib</span> For <span><a href="http://themeforest.com" target="_blank">Themeforest</a></span>.</p>
+	</footer>
+<!--End Page Footer-->
+</div>
+<!--End Page Wrraper-->
+</body>
+</html>
