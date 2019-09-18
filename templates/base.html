@@ -144,8 +144,12 @@ setActiveStyleSheet(title);
 			
 <!--Page Header-->
 <header id="header">
-	
-	<figure><a href="{% url 'download_cv' pk=cv.pk %}"><h2>Download CV</h2></a></figure>
+
+
+	<figure><a href="{% if cv != '' %}
+	{% url 'download_cv' pk=cv.pk %}
+	{% endif %}"><h2>Download CV</h2></a></figure>
+
 <nav id="mainNav">
 		<ul  class="tabs">
 			<li ><a href="#home">Home</a></li>
@@ -299,7 +303,7 @@ setActiveStyleSheet(title);
 				<!--Contact info-->	
 				<section id="contactInfo">
 						<h3>Contact Information</h3>
-						<figure><a id="googlemap" class="map" title="View Via Google Maps" href="http://maps.google.fr/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q=rabat+agdal&amp;aq=&amp;sll=34.004252,-6.84522&amp;sspn=0.03515,0.077162&amp;ie=UTF8&amp;hq=&amp;hnear=Agdal,+Rabat,+Rabat-Sal%C3%A9-Zemmour-Za%C3%ABr,+Maroc&amp;ll=34.004218,-6.845255&amp;spn=0.035154,0.077162&amp;t=m&amp;z=14&amp;output=embed"><img src='{% static "images/map.png" %}'  alt=""/></a></figure>
+						<figure><a id="googlemap" class="map" title="View Via Google Maps" href="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q=rabat+agdal&amp;aq=&amp;sll=34.004252,-6.84522&amp;sspn=0.03515,0.077162&amp;ie=UTF8&amp;hq=&amp;hnear=Agdal,+Rabat,+Rabat-Sal%C3%A9-Zemmour-Za%C3%ABr,+Maroc&amp;ll=34.004218,-6.845255&amp;spn=0.035154,0.077162&amp;t=m&amp;z=14&amp;output=embed"><img src='{% static "images/map.png" %}'  alt=""/></a></figure>
 						
 					
 					   

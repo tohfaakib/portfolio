@@ -1,19 +1,31 @@
 from django.shortcuts import render
 from .models import Project
 
+from cv.models import CV
+
 # Create your views here.
 
 def project_index(request):
     projects = Project.objects.all()
+
     context = {
-        'projects': projects
+        'projects': projects,
+
     }
     return render(request, 'project/index.html', context)
 
 
 def project_detail(request, pk):
     project = Project.objects.get(pk=pk)
+    cv = CV.objects.all().order_by('-created_at')
+
+    if len(cv) > 0:
+        cv = cv[0]
+    else:
+        cv = ''
+
     context = {
-        'project': project
+        'project': project,
+        'cv': cv
     }
     return render(request, 'project/detail.html', context)
