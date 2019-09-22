@@ -35,6 +35,8 @@ ALLOWED_HOSTS = ['*']
 CREATED_APPS = [
     'projects',
     'cv',
+    'biography',
+    'contact'
 ]
 
 INSTALLED_APPS = [
@@ -134,4 +136,15 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 

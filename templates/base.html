@@ -168,43 +168,44 @@ setActiveStyleSheet(title);
 		
 			<!--About Tab-->
 		<article id="home" class="clearfix">
-			<figure id="img"></figure>
+			<figure id="img"><img src='{{ biography.image.url }}' width="154px" height="206x" alt=""></figure>
 			
 				<div id="about">
 				<hgroup>
-				<h1>John Doe</h1>
-				<h3>WebDesigner/Developer</h3>
+				<h1>{{ biography.name }}</h1>
+				<h3>{{ biography.professional_title }}</h3>
 				</hgroup>
 				
 					<!--Intro Section-->
 				<section id="introduction">
 					<h2>About</h2>
-					<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-					</p>
+					<p>{{ biography.about }}</p>
 				</section>
 					<!--End Intro Section-->
 				
 				<!--Skills Section-->
 				<section id="skills">
 				<h2>Skills</h2>
+
+					{% for skill in skills %}
 				
 					<ul class="skillList">
-						<li>Photoshop</li>
-						<li>Javascript</li>
-						<li>SEO</li>
+						<li>{{ skill }}</li>
+<!--						<li>Javascript</li>-->
+<!--						<li>SEO</li>-->
 						</ul>
-						
-						<ul class="skillList">
-							<li>HTML/CSS</li>
-							<li>PHP/ASP</li>
-							<li>WordPress</li>
-							</ul>
-							
-							<ul class="skillList">
-								<li>Logo &amp; Illustration</li>
-								<li>Icon-Design</li>
-								<li>Web &amp; GUI-Design</li>
-								</ul>
+						{% endfor %}
+<!--						<ul class="skillList">-->
+<!--							<li>HTML/CSS</li>-->
+<!--							<li>PHP/ASP</li>-->
+<!--							<li>WordPress</li>-->
+<!--							</ul>-->
+<!--							-->
+<!--							<ul class="skillList">-->
+<!--								<li>Logo &amp; Illustration</li>-->
+<!--								<li>Icon-Design</li>-->
+<!--								<li>Web &amp; GUI-Design</li>-->
+<!--								</ul>-->
 						</section>
 					<!--End Skills Section-->
 				</div>
@@ -286,13 +287,17 @@ setActiveStyleSheet(title);
 			
 				<!--Contact Tab-->	
 		<article id="contact" class="clearfix">
+
 				<h2>Contact</h2>
 			<!--Contact form-->		
 			<section id="contactForm">
+				<h2>{{msg}}</h2>
 				<h3>Feel Free to send me an email</h3>
-				<form class="contactForm" method="post" action="send.php">
+				<form class="contactForm" method="POST" action="{% url 'send_mail' %}">
+					{% csrf_token %}
 			        <input type="text" name="name" id="name" placeholder="Your Name" class="required">
 			        <input type="email" name="email" id="email"  placeholder="Your Email" class="required">
+			        <input type="text" name="subject" id="subject"  placeholder="Email Subject" class="required">
 			        <textarea name="message" id="message"  cols="45" rows="10" placeholder="Your Message" class="required"></textarea>
 			        <input type="submit" name="submit" id="submit" value="Send your email">
 			      </form>
