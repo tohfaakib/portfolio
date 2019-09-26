@@ -33,6 +33,7 @@ eggs/
 .eggs/
 lib/
 !static/lib/
+!static/dist/
 lib64/
 parts/
 sdist/

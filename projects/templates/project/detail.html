@@ -2,14 +2,58 @@
 <!--{% load static %}-->
 
 {% block portfolio %}
-    <h1>{{ project.title }}</h1>
+    <h1 style="color: black">{{ project.title }}</h1>
+    <br>
     <div class="row">
         <div class="col-md-8">
+
+
+<!--            <style>-->
+<!--                .ytp-title {-->
+<!--                    overflow: hidden;-->
+<!--                    flex: 1;-->
+<!--                    display: none !important;-->
+<!--                }-->
+<!--            </style>-->
+
+
+            {% if project.video %}
+
+                <video
+                    id="vid4"
+                    class="video-js vjs-default-skin vjs-volume-control vjs-fullscreen-control"
+                    controls
+                    autoplay
+
+                    width="640" height="264"
+                    data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "{{ project.video }}"}] }'
+            >
+            </video>
+
+            <script>
+                $(".ytp-title").onload(function () {
+                    $(".ytp-title").hide();
+                });
+            </script>
+
+            <br>
+
+            {% else %}
+
             <img src="{{ project.image.url }}" alt="" width="100%">
+
+            {% endif %}
         </div>
-        <div class="col-md-4">
+        <br>
+        <br>
+        <br>
+        <div  class="col-md-4" style="color: black">
             <h5>About the project:</h5>
             <p>{{ project.description }}</p>
+            <br>
+            <br>
+            <h5>Git: <a style="color: #00b4d9; font-weight: bolder" href="{{ project.url }}">Click Here</a> </h5>
+            <br>
             <br>
             <h5>Technology used:</h5>
             <p>{{ project.technology }}</p>

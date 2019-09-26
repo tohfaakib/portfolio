@@ -3,7 +3,7 @@ from .models import Project, Project_Category
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    fields = ('categories', 'title', 'description', 'technology', 'image', 'url')
+    fields = ('categories', 'title', 'description', 'technology', 'image', 'video', 'url')
     list_display = ('title', 'technology', 'url')
 
 
