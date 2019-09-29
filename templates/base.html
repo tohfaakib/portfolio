@@ -291,17 +291,23 @@ setActiveStyleSheet(title);
 				
 					<!-- Socials -->	
 				<section id="socialsLists" class="clearfix">
+					{% for social in socials %}
 				<ul class="socialList1 ">
-					<li><a href="#" ><img src='{% static "images/fb.png" %}' alt=""/><h3>FaceBook</h3><span>facebook.com/yourname</span></a></li>
-					<li><a href="#"><img src='{% static "images/tw.png" %}' alt="" /><h3>Twitter</h3><span>twitter.com/yourname</span></a></li>
-					<li><a href="#" ><img src='{% static "images/fl.png" %}' alt=""/><h3>Flickr</h3><span>flickr.com/yourname</span></a></li>
+
+
+					<li><a href="#" ><img src='{{ social.favicon.url }}' alt=""/><h3>{{ social.name }}</h3><span>{{ social.profile_url }}</span></a></li>
+
+
+<!--					<li><a href="#"><img src='{% static "images/tw.png" %}' alt="" /><h3>Twitter</h3><span>twitter.com/yourname</span></a></li>-->
+<!--					<li><a href="#" ><img src='{% static "images/fl.png" %}' alt=""/><h3>Flickr</h3><span>flickr.com/yourname</span></a></li>-->
 					</ul>
+					{% endfor %}
 					
-					<ul class="socialList2 ">
-						<li><a href="#" ><img src='{% static "images/in.png" %}' alt=""/><h3>Linkedin</h3><span>linkedin.com/yourname</span></a></li>
-						<li><a href="#"><img src='{% static "images/vm.png" %}' alt=""/><h3>Vimeo</h3><span>vimeo.com/yourname</span></a></li>
-						<li><a href="#"><img src='{% static "images/rss.png" %}' alt=""/><h3>Rss Feed</h3><span>rss.com/yoursite</span></a></li>
-						</ul>
+<!--					<ul class="socialList2 ">-->
+<!--						<li><a href="#" ><img src='{% static "images/in.png" %}' alt=""/><h3>Linkedin</h3><span>linkedin.com/yourname</span></a></li>-->
+<!--						<li><a href="#"><img src='{% static "images/vm.png" %}' alt=""/><h3>Vimeo</h3><span>vimeo.com/yourname</span></a></li>-->
+<!--						<li><a href="#"><img src='{% static "images/rss.png" %}' alt=""/><h3>Rss Feed</h3><span>rss.com/yoursite</span></a></li>-->
+<!--						</ul>-->
 						</section>
 						<!-- End Socials -->
 						

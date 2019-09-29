@@ -36,8 +36,10 @@ CREATED_APPS = [
     'projects',
     'cv',
     'biography',
-    'contact'
+    'contact',
+    'social'
 ]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -47,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ] + CREATED_APPS
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
