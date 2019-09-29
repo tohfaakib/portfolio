@@ -142,12 +142,17 @@ MEDIA_URL = '/media/'
 
 
 
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+# SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+# #
+# # EMAIL_HOST = 'smtp.sendgrid.net'
+# # EMAIL_HOST_USER = 'apikey'
+# # EMAIL_HOST_PASSWORD = ''
+# # EMAIL_PORT = 587
+# # EMAIL_USE_TLS = True
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = ''
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "petergsalmo12@gmail.com"
+EMAIL_HOST_PASSWORD = 'smriti224'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
-

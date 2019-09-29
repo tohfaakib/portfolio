@@ -12,7 +12,6 @@ def email_sending(request):
         subject = request.POST.get("subject")
         messages = request.POST.get("message")
 
-        print(name)
 
         subject = email + ': '+subject
         message = messages

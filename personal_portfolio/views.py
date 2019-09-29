@@ -8,10 +8,16 @@ from social.models import Social
 def base(request):
     projects = Project.objects.all()
     categories = Project_Category.objects.all()
-    biography = Biography.objects.all()[0]
-    skills = biography.skills.all()
+    biography = Biography.objects.all()
     cv = CV.objects.all().order_by('-created_at')
     socials = Social.objects.all()
+
+    if len(biography) > 0:
+        biography = biography[0]
+        skills = biography.skills.all()
+    else:
+        biography = ''
+        skills = ''
 
     if len(cv) > 0:
         cv = cv[0]
