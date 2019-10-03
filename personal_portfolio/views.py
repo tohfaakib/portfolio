@@ -5,6 +5,8 @@ from cv.models import CV
 from biography.models import Biography
 from social.models import Social
 
+from utils.logics import lengthMeasure  # additional logics
+
 def base(request):
     projects = Project.objects.all()
     categories = Project_Category.objects.all()
@@ -12,17 +14,12 @@ def base(request):
     cv = CV.objects.all().order_by('-created_at')
     socials = Social.objects.all()
 
-    if len(biography) > 0:
-        biography = biography[0]
-        skills = biography.skills.all()
-    else:
-        biography = ''
-        skills = ''
+    biography = lengthMeasure(biography)
+    skills = biography.skills.all()
 
-    if len(cv) > 0:
-        cv = cv[0]
-    else:
-        cv = ''
+    cv = lengthMeasure(cv)
+
+
 
     context = {
         'projects': projects,
