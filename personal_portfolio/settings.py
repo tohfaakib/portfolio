@@ -1,3 +1,5 @@
+from secrets import secrets
+
 """
 Django settings for personal_portfolio project.
 
@@ -152,7 +154,7 @@ MEDIA_URL = '/media/'
 
 
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = ""
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = secrets.username
+EMAIL_HOST_PASSWORD = secrets.password
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
